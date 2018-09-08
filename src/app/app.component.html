@@ -1,20 +1,14 @@
 <mat-toolbar>{{title}}</mat-toolbar>
 <div class="container-fluid">
-  <button mat-button>Click me!</button>
   <div class="row">
-    <div class="col-12">
-        <mat-card>
-            <mat-card-header>
-              <mat-card-title>Shiba Inu</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-              </mat-card-content>
-          </mat-card>
+    <div class="col-2">
+      <mat-list>
+        <a routerLink = 'event' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Event</mat-list-item></a>
+        <a routerLink = 'item' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Item</mat-list-item></a>
+      </mat-list>
+    </div>
+    <div class="col-10">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
