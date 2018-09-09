@@ -16,11 +16,12 @@ export class EventComponent implements OnInit {
 
   addEvent(){
     const dialogRef = this.dialog.open(AddEventComponent, {
-      width: '600px',
+      width: '370px',
       data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       console.log('The dialog was closed');
     });
   }
