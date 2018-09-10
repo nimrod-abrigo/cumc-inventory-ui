@@ -12,13 +12,14 @@ export class EventService {
   constructor(private _http: HttpClient) { }
 
   public addEvent(event):Observable<any>{
-    const myheader = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    const myheader = new HttpHeaders().set('Content-Type', 'application/json')
     
-    let body = new HttpParams();
-    body = body.set('event_name', event.event_name);
-    body = body.set('event_remarks', event.event_remarks);
-    body = body.set('start_date',event.start_date);
-    body = body.set('end_date', event.end_date);
+    let body = { 
+      event_name: event.event_name,
+      event_remarks : event.event_remarks,
+      start_date : event.start_date,
+      end_date : event.end_date
+    }
 
     return this._http.post(this.API_URL,body,{headers: myheader});
   }

@@ -16,16 +16,16 @@
         <div class='row'>
             <div class = "col-6">
                 <mat-form-field class="full-width">
-                    <input matInput [matDatepicker]="start_date" placeholder="Start Date" name = 'start_date' ngModel required #start_date="ngModel">
+                    <input matInput [matDatepicker]="start_date" placeholder="Start Date" name = 'start_date' ngModel required #start_date="ngModel" disabled>
                     <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
-                    <mat-datepicker #start_date></mat-datepicker>
+                    <mat-datepicker disabled="false" #start_date></mat-datepicker>
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field class="full-width">
-                    <input matInput [matDatepicker]="end_date" placeholder="End Date" name = 'end_date' ngModel required #end_date="ngModel">
+                    <input matInput [matDatepicker]="end_date" placeholder="End Date" name = 'end_date' ngModel required #end_date="ngModel" disabled>
                     <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
-                    <mat-datepicker #end_date></mat-datepicker>
+                    <mat-datepicker disabled="false" #end_date></mat-datepicker>
                 </mat-form-field>
             </div>
         </div>
