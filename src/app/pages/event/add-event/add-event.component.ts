@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EventService } from '../../../service/event.service';
 import { Observable } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormParseValidation } from '../../../classes/form-parse-validation';
 
 @Component({
   selector: 'app-add-event',
@@ -10,33 +12,42 @@ import { Observable } from 'rxjs';
 })
 export class AddEventComponent implements OnInit {
   result: Observable<any>;
+  eventForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     private eventService: EventService) { }
 
   ngOnInit() {
+    this.eventForm = new FormGroup({
+      event_name: new FormControl('',[
+        Validators.required
+      ]),
+      event_remarks: new FormControl(''),
+      start_date: new FormControl('',[
+        Validators.required
+      ]),
+      end_date: new FormControl('',[
+        Validators.required
+      ])
+    },FormParseValidation.validateDate);
   }
 
-  submitDetails(eventForm){
-    let tmp_date = this.convertDateJson(eventForm.value.start_date);
-    eventForm.value.start_date = tmp_date;
-    tmp_date = this.convertDateJson(eventForm.value.end_date);
-    eventForm.value.end_date = tmp_date;
+  submitDetails(){
+    let eventValues = this.eventForm.value;
 
-    console.log(eventForm.value);
-    this.eventService.addEvent(eventForm.value).subscribe(
+    let tmp_date = FormParseValidation.convertDateJson(eventValues.start_date);
+    eventValues.start_date = tmp_date;
+    tmp_date = FormParseValidation.convertDateJson(eventValues.end_date);
+    eventValues.end_date = tmp_date;
+
+    this.eventService.addEvent(eventValues).subscribe(
       result=>{
         this.result = result;
-        console.log(result);
         this.dialogRef.close(this.result);
       }
     );
   }
 
-  convertDateJson(date){
-    var tmp_date = new Date(date);
-    tmp_date.setDate(tmp_date.getDate() + 1);
-    return tmp_date.toJSON();
-  }
+  
 }
