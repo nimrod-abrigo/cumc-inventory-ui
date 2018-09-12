@@ -28,4 +28,8 @@ export class EventService {
     return this._http.get(this.API_URL);
   }
 
+  public deleteEvent(event_id):Observable<any>{
+    return this._http.delete(this.API_URL+"/"+event_id);
+  }
+
 }

@@ -33,9 +33,9 @@ export class EventComponent implements OnInit {
       if(result != null){
         if(result.affectedRows == 1){
           this.openSnackBar("event inserted",null);
+          this.getAllEvents();
         }
       }
-      console.log('The dialog was closed');
     });
   }
 
@@ -54,7 +54,7 @@ export class EventComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.getAllEvents();
     });
   }
 
