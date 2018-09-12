@@ -24,4 +24,8 @@ export class EventService {
     return this._http.post(this.API_URL,body,{headers: myheader});
   }
 
+  public getAllEvents():Observable<any>{
+    return this._http.get(this.API_URL);
+  }
+
 }

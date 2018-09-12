@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventComponent } from './pages/event/event.component';
 import { ItemComponent } from './pages/item/item.component';
 import { AddEventComponent } from './pages/event/add-event/add-event.component';
+import { DeleteEventComponent } from './pages/event/delete-event/delete-event.component';
 
 const routes : Routes = [
   { path:'event', component:EventComponent },
@@ -17,8 +18,9 @@ const routes : Routes = [
   ],
   declarations: [],
   entryComponents: [
-    AddEventComponent
+    AddEventComponent,
+    DeleteEventComponent
   ],
 })
 export class AppRoutingModule { }
-export const routingComponents = [EventComponent,ItemComponent, AddEventComponent]
+export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent]

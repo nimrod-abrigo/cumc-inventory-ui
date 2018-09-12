@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddEventComponent } from './add-event/add-event.component';
+import { EventService } from '../../service/event.service';
+import { Observable } from 'rxjs';
+import { EventClass } from '../../classes/event';
+import { DeleteEventComponent } from './delete-event/delete-event.component';
+
 
 @Component({
   selector: 'app-event',
@@ -9,9 +14,13 @@ import { AddEventComponent } from './add-event/add-event.component';
 })
 export class EventComponent implements OnInit {
 
-  constructor(public dialog:MatDialog) { }
+  events: Observable<any>;
+  event:Array<EventClass>;
+
+  constructor(public dialog:MatDialog, public snackBar: MatSnackBar, private eventService:EventService) { }
 
   ngOnInit() {
+    this.getAllEvents();
   }
 
   addEvent(){
@@ -21,8 +30,37 @@ export class EventComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result != null){
+        if(result.affectedRows == 1){
+          this.openSnackBar("event inserted",null);
+        }
+      }
       console.log('The dialog was closed');
+    });
+  }
+
+  getAllEvents(){
+    this.eventService.getAllEvents().subscribe(
+      result=>{
+        this.events = result;
+      }
+    );
+  }
+
+  deleteEvent(event_id){
+    const dialogRef = this.dialog.open(DeleteEventComponent, {
+      width: '370px',
+      data: {event_id : event_id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 }
