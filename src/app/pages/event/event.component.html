@@ -9,15 +9,15 @@
     </div>
   </div>
   <div class="row">
-    <div class='col-8'>
-      <div class = 'col-6' *ngFor="let event of events">
+    <div class='col-12'>
+      <div class = 'col-4' *ngFor="let event of events">
         <mat-card>
           <mat-card-title>{{event.event_name}}</mat-card-title>
           <mat-card-subtitle>{{event.event_remarks}}</mat-card-subtitle>
           <mat-card-content>{{event.start_date|date}} - {{event.end_date|date}}</mat-card-content>
           <mat-card-actions>
             <button mat-stroked-button matTooltip="Event Information" matTooltipPosition = 'below'><mat-icon>info</mat-icon></button>
-            <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below'><mat-icon>edit</mat-icon></button>
+            <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below' (click)="editEvent(event)"><mat-icon>edit</mat-icon></button>
             <button mat-stroked-button color="warn" matTooltip="Delete Event" matTooltipPosition = 'below' (click)="deleteEvent(event.event_id)"><mat-icon>delete</mat-icon></button>
           </mat-card-actions>
         </mat-card>
