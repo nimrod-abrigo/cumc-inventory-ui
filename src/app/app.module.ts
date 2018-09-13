@@ -8,13 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './/app-routing.module';
-import { DeleteEventComponent } from './pages/event/delete-event/delete-event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    DeleteEventComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
