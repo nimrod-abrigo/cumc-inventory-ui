@@ -44,4 +44,8 @@ export class EventService {
     return this._http.put(this.API_URL+"/"+event.event_id,body,{headers: myheader});
   }
 
+  public getEventDetail(event_id):Observable<any>{
+    return this._http.get(this.API_URL+"/"+event_id);
+  }
+
 }

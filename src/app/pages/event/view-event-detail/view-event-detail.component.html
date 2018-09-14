@@ -1,0 +1,27 @@
+<button routerLink='../../event' matTooltip="Back to Events" matTooltipPosition = 'right' mat-stroked-button><mat-icon>arrow_left</mat-icon></button><br>
+<mat-list>
+  <mat-list-item><h3>{{eventDetail.event_name}}</h3></mat-list-item>
+  <mat-list-item>{{eventDetail.event_remarks}}<br>{{eventDetail.start_date|date}} - {{eventDetail.end_date|date}}</mat-list-item>
+</mat-list>
+<mat-divider></mat-divider>
+<h4>Event Items</h4>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Item_Name
+      </mat-panel-title>
+      <mat-panel-description>
+        Item description
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="First name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Age">
+    </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
