@@ -41,7 +41,7 @@ export class EventComponent implements OnInit {
   getAllEvents(){
     this.eventService.getAllEvents().subscribe(
       result=>{
-        this.events = result;
+        this.events = result; 
       }
     );
   }
