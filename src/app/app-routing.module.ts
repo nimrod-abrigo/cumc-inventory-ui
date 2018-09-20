@@ -8,6 +8,7 @@ import { DeleteEventComponent } from './pages/event/delete-event/delete-event.co
 import { EditEventComponent } from './pages/event/edit-event/edit-event.component';
 import { ViewEventDetailComponent } from './pages/event/view-event-detail/view-event-detail.component';
 import { ItemInfoComponent } from './pages/item/item-info/item-info.component';
+import { DeleteItemComponent } from './pages/item/dialog/delete-item/delete-item.component';
 
 const routes : Routes = [
   { path:'event', component:EventComponent },
@@ -24,7 +25,8 @@ const routes : Routes = [
   entryComponents: [
     AddEventComponent,
     DeleteEventComponent,
-    EditEventComponent
+    EditEventComponent,
+    DeleteItemComponent
   ],
 })
 export class AppRoutingModule { }

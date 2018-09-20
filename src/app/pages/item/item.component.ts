@@ -3,6 +3,8 @@ import { ItemService } from '../../service/item.service';
 import { Observable, Subscription } from 'rxjs';
 import { Item } from '../../classes/item';
 import { Part } from '../../classes/part';
+import { MatDialog } from '@angular/material';
+import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
 
 @Component({
   selector: 'app-item',
@@ -13,10 +15,9 @@ export class ItemComponent implements OnInit {
 
   equipments:Observable<any>;
   item:Item;
-  itemSelected:Observable<any>;
   itemSub:Subscription;
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService,public dialog:MatDialog) { }
 
   ngOnInit() {
     this.getAllEquipments();
@@ -39,6 +40,14 @@ export class ItemComponent implements OnInit {
   }
 
   deleteItem(item_id){
-    console.log("Delete "+item_id);
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      width: '370px',
+      data: {item_id : item_id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAllEquipments();
+      this.item = null;
+    });
   }
 }
