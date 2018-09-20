@@ -3,15 +3,21 @@
       <h4>Equipments</h4>
       <mat-nav-list>
         <mat-list-item *ngFor="let equipment of equipments">
-            <a matLine href="...">{{equipment.item_name}}</a>
-            <button mat-icon-button (click)="showInfo(equipment.item_id)" matTooltip="Item Information" matTooltipPosition = 'below'>
+            <a matLine (click)="getItemInfo(equipment.item_id)">{{equipment.item_name}}</a>
+            <!--<button mat-icon-button (click)="getItemInfo(equipment.item_id)" matTooltip="Item Information" matTooltipPosition = 'below'>
               <mat-icon>info</mat-icon>
+            </button>-->
+            <button mat-icon-button (click)="editItem(equipment.item_id)" matTooltip="Edit Item" matTooltipPosition = 'below'>
+              <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button (click)="deleteItem(equipment.item_id)" matTooltip="Delete Item" matTooltipPosition = 'below'>
               <mat-icon>delete</mat-icon>
             </button>
         </mat-list-item>
       </mat-nav-list>
+  </div>
+  <div class="col-6">
+    <app-item-info [itemInfo] = "item"></app-item-info>
   </div>
 </div>
   

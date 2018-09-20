@@ -1,0 +1,16 @@
+<div *ngIf="itemInfo">
+  <mat-card>
+    <h4>{{itemInfo.item_name}}</h4>
+    <p>{{itemInfo.item_description}}
+      <br>Available: {{itemInfo.number_available}}
+    </p>
+  </mat-card>
+  <mat-list *ngIf="itemInfo.parts">
+    <mat-list-item *ngFor="let part of itemInfo.parts">
+      {{part.part_name}}
+    </mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf="!itemInfo">
+  <h4>Select a item to display</h4>
+</div>

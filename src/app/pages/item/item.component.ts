@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../service/item.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Item } from '../../classes/item';
+import { Part } from '../../classes/part';
 
 @Component({
   selector: 'app-item',
@@ -10,6 +12,9 @@ import { Observable } from 'rxjs';
 export class ItemComponent implements OnInit {
 
   equipments:Observable<any>;
+  item:Item;
+  itemSelected:Observable<any>;
+  itemSub:Subscription;
 
   constructor(private itemService: ItemService) { }
 
@@ -18,24 +23,22 @@ export class ItemComponent implements OnInit {
   }
 
   getAllEquipments(){
-    this.itemService.getAllItemsByCategory(1).subscribe(
+    this.itemSub = this.itemService.getAllItemsByCategory(1).subscribe(
       result=>{
         this.equipments = result; 
       }
     );
   }
 
-  showInfo(item_id){
+  getItemInfo(item_id){
     this.itemService.getItemParts(item_id).subscribe(
       result=>{
-        this.equipments = result; 
+        this.item = result[0];
       }
     );
-    console.log("View "+item_id);
   }
 
   deleteItem(item_id){
-
     console.log("Delete "+item_id);
   }
 }
