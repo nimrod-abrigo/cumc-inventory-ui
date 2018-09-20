@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './/app-routing.module';
+import { AddPartComponent } from './pages/item/dialog/add-part/add-part.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    AddPartComponent
   ],
   imports: [
     BrowserModule,

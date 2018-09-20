@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ItemService } from '../../../service/item.service';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { DeletePartComponent } from '../dialog/delete-part/delete-part.component';
+import { AddPartComponent } from '../dialog/add-part/add-part.component';
 
 @Component({
   selector: 'app-item-info',
@@ -22,8 +20,15 @@ export class ItemInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  addPart(){
+  addPart(item_id){
+    const dialogRef = this.dialog.open(AddPartComponent, {
+      width: '370px',
+      data: {item_id : item_id}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.deletePartEvent.emit(result);
+    });
   }
 
   deletePart(part_id){
