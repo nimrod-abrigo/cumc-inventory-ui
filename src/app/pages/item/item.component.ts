@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../service/item.service';
 import { Observable, Subscription } from 'rxjs';
 import { Item } from '../../classes/item';
-import { Part } from '../../classes/part';
 import { MatDialog } from '@angular/material';
 import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
+import { EditItemComponent } from './dialog/edit-item/edit-item.component';
 
 @Component({
   selector: 'app-item',
@@ -48,6 +48,23 @@ export class ItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getAllEquipments();
       this.item = null;
+    });
+  }
+
+  editItem(item_info){
+    const dialogRef = this.dialog.open(EditItemComponent, {
+      width: '370px',
+      data: {item_info : item_info}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result){
+        if(result.affectedRows==1){
+          this.getAllEquipments();
+          this.getItemInfo(item_info.item_id);
+        }
+      }
     });
   }
 }

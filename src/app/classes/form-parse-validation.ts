@@ -12,4 +12,10 @@ export class FormParseValidation {
         tmp_date.setDate(tmp_date.getDate() + 1);
         return tmp_date.toJSON();
     }
+
+    static convertDateJson2(date){
+        var tmp_date = new Date(date);
+        tmp_date.setDate(tmp_date.getDate());
+        return tmp_date.toJSON();
+    }
 }

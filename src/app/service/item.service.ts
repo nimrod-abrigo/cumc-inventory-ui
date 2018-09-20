@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,20 @@ export class ItemService {
 
   public getItemParts(item_id):Observable<any>{
     return this._http.get(this.API_URL+"/info/"+item_id);
+  }
+
+  public editItem(item):Observable<any>{
+    console.log(item);
+
+    const myheader = new HttpHeaders().set('Content-Type', 'application/json');
+    
+    let body = { 
+      item_name: item.item_name,
+      item_description : item.item_description,
+      number_total : item.number_total,
+      last_update_date: item.last_update_date
+    }
+
+    return this._http.put(this.API_URL+"/"+item.item_id,body,{headers: myheader});
   }
 }

@@ -2,7 +2,8 @@
   <mat-card>
     <h4>{{itemInfo.item_name}}</h4>
     <p>{{itemInfo.item_description}}
-      <br>Available: {{itemInfo.number_available}}
+      <br>Total: {{itemInfo.number_total}}
+      <br>Date Added: {{itemInfo.created_date|date}}
     </p>
   </mat-card>
   <mat-list *ngIf="itemInfo.parts">

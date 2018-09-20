@@ -9,6 +9,7 @@ import { EditEventComponent } from './pages/event/edit-event/edit-event.componen
 import { ViewEventDetailComponent } from './pages/event/view-event-detail/view-event-detail.component';
 import { ItemInfoComponent } from './pages/item/item-info/item-info.component';
 import { DeleteItemComponent } from './pages/item/dialog/delete-item/delete-item.component';
+import { EditItemComponent } from './pages/item/dialog/edit-item/edit-item.component';
 
 const routes : Routes = [
   { path:'event', component:EventComponent },
@@ -26,8 +27,9 @@ const routes : Routes = [
     AddEventComponent,
     DeleteEventComponent,
     EditEventComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    EditItemComponent
   ],
 })
 export class AppRoutingModule { }
-export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent]
+export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent]

@@ -8,7 +8,7 @@ export class Item {
     number_available:Number;
     number_unavailable:Number;
     category_id:Number;
-    created_date:Date;
-    last_updated_date:Date;
+    created_date:String;
+    last_update_date:String;
     parts:Part[];
 }
