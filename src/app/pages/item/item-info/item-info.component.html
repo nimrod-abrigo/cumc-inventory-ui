@@ -1,16 +1,39 @@
 <div *ngIf="itemInfo">
-  <mat-card>
-    <h4>{{itemInfo.item_name}}</h4>
-    <p>{{itemInfo.item_description}}
-      <br>Total: {{itemInfo.number_total}}
-      <br>Date Added: {{itemInfo.created_date|date}}
-    </p>
-  </mat-card>
-  <mat-list *ngIf="itemInfo.parts">
-    <mat-list-item *ngFor="let part of itemInfo.parts">
-      {{part.part_name}}
-    </mat-list-item>
-  </mat-list>
+  <div class="col-7">
+    <mat-card>
+      <h4>{{itemInfo.item_name}}</h4>
+      <p>{{itemInfo.item_description}}
+        <br>Total: {{itemInfo.number_total}}
+        <br>Date Added: {{itemInfo.created_date|date}}
+      </p>
+    </mat-card>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>Parts</span>
+        <span class="example-spacer"></span>
+        <button mat-raised-button matTooltip="Add Part" matTooltipPosition="above" (click)="addPart()"><mat-icon>add</mat-icon></button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <mat-table #table [dataSource]="itemInfo.parts">
+        <ng-container matColumnDef="part_name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let part"> {{part.part_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="part_description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let part"> {{part.part_description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+          <mat-cell  *matCellDef="let part">
+            <button mat-raised-button matTooltip="Delete Part" matTooltipPosition="above" (click)="deletePart(part.part_id)"><mat-icon>delete</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+  </div>
 </div>
 <div *ngIf="!itemInfo">
   <h4>Select a item to display</h4>

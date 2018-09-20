@@ -37,4 +37,8 @@ export class ItemService {
 
     return this._http.put(this.API_URL+"/"+item.item_id,body,{headers: myheader});
   }
+
+  public deletePart(part_id):Observable<any>{
+    return this._http.delete(this.API_URL+"/part/"+part_id);
+  }
 }

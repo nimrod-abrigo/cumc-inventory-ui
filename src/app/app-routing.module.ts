@@ -10,6 +10,7 @@ import { ViewEventDetailComponent } from './pages/event/view-event-detail/view-e
 import { ItemInfoComponent } from './pages/item/item-info/item-info.component';
 import { DeleteItemComponent } from './pages/item/dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './pages/item/dialog/edit-item/edit-item.component';
+import { DeletePartComponent } from './pages/item/dialog/delete-part/delete-part.component';
 
 const routes : Routes = [
   { path:'event', component:EventComponent },
@@ -28,8 +29,9 @@ const routes : Routes = [
     DeleteEventComponent,
     EditEventComponent,
     DeleteItemComponent,
-    EditItemComponent
+    EditItemComponent,
+    DeletePartComponent
   ],
 })
 export class AppRoutingModule { }
-export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent]
+export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent, DeletePartComponent]

@@ -67,4 +67,13 @@ export class ItemComponent implements OnInit {
       }
     });
   }
+
+  deletePart(result){
+    if(result){
+      if(result.affectedRows==1){
+        this.getAllEquipments();
+        this.getItemInfo(this.item.item_id);
+      }
+    }
+  }
 }
