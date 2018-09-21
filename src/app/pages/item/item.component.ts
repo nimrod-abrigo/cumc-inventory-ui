@@ -5,6 +5,7 @@ import { Item } from '../../classes/item';
 import { MatDialog } from '@angular/material';
 import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './dialog/edit-item/edit-item.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 @Component({
   selector: 'app-item',
@@ -75,5 +76,21 @@ export class ItemComponent implements OnInit {
         this.getItemInfo(this.item.item_id);
       }
     }
+  }
+
+  addItem(){
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result){
+        if(result.affectedRows==1){
+          this.getAllEquipments();
+          this.item = null;
+        }
+      }
+    });
   }
 }

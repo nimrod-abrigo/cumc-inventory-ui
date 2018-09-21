@@ -47,4 +47,10 @@ export class ItemService {
 
     return this._http.post(this.API_URL+"/part/"+item_id,part,{headers: myheader});
   }
+
+  public addItem(item){
+    const myheader = new HttpHeaders().set('Content-Type', 'application/json');
+    
+    return this._http.post(this.API_URL,item,{headers: myheader});
+  }
 }
