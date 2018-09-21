@@ -13,6 +13,7 @@ export class ItemInfoComponent implements OnInit {
   id;
   @Input() itemInfo;
   @Output() deletePartEvent = new EventEmitter();
+  @Output() addPartEvent = new EventEmitter();
   displayedColumns=["part_name","part_description","action"];
 
   constructor(public dialog:MatDialog) { }

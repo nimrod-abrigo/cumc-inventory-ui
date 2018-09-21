@@ -24,7 +24,6 @@ export class ItemService {
   }
 
   public editItem(item):Observable<any>{
-    console.log(item);
 
     const myheader = new HttpHeaders().set('Content-Type', 'application/json');
     
@@ -40,5 +39,12 @@ export class ItemService {
 
   public deletePart(part_id):Observable<any>{
     return this._http.delete(this.API_URL+"/part/"+part_id);
+  }
+
+  public addPart(part,item_id):Observable<any>{
+
+    const myheader = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this._http.post(this.API_URL+"/part/"+item_id,part,{headers: myheader});
   }
 }

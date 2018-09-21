@@ -20,13 +20,24 @@ export class AddPartComponent implements OnInit {
 
   ngOnInit() {
     this.item_id = this.data.item_id;
-    
+
     this.partForm = new FormGroup({
       part_name: new FormControl('',[
         Validators.required
       ]),
       part_description: new FormControl('')
     });
+  }
+
+  submitDetails(){
+    let partValues = [];
+    partValues[0] = this.partForm.value;
+
+    this.itemService.addPart(partValues,this.item_id).subscribe(
+      result=>{
+        this.dialogRef.close(result);
+      }
+    );
   }
 
 }
