@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  private readonly API_URL = "http://localhost:4000/event";
+  private readonly API_URL = environment.apiUrl+"/event";
 
   constructor(private _http: HttpClient) { }
 
