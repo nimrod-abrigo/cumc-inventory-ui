@@ -86,7 +86,7 @@ export class ItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result){
-        if(result.affectedRows==1){
+        if(result.item.affectedRows==1){
           this.getAllEquipments();
           this.item = null;
         }
