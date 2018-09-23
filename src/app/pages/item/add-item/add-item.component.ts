@@ -12,6 +12,11 @@ export class AddItemComponent implements OnInit {
 
   itemForm: FormGroup;
   parts: FormArray;
+  categories = [
+    {id:1, name:'equipment'},
+    {id:2, name:'accessories / peripherals'}, 
+    {id:3, name:'prizes'}
+  ];
 
   constructor(public dialogRef: MatDialogRef<AddItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,6 +31,9 @@ export class AddItemComponent implements OnInit {
       number_total: new FormControl('',[
         Validators.required,
         Validators.pattern('^[0-9]*$')
+      ]),
+      category_id: new FormControl('',[
+        Validators.required
       ]),
       parts: new FormArray([])
     });
