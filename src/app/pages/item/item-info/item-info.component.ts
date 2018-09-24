@@ -12,8 +12,7 @@ export class ItemInfoComponent implements OnInit {
 
   id;
   @Input() itemInfo;
-  @Output() deletePartEvent = new EventEmitter();
-  @Output() addPartEvent = new EventEmitter();
+  @Output() partEvent = new EventEmitter();
   displayedColumns=["part_name","part_description","action"];
 
   constructor(public dialog:MatDialog) { }
@@ -23,12 +22,12 @@ export class ItemInfoComponent implements OnInit {
 
   addPart(item_id){
     const dialogRef = this.dialog.open(AddPartComponent, {
-      width: '370px',
+      width: '500px',
       data: {item_id : item_id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.deletePartEvent.emit(result);
+      this.partEvent.emit(result);
     });
   }
 
@@ -39,7 +38,7 @@ export class ItemInfoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.deletePartEvent.emit(result);
+      this.partEvent.emit(result);
     });
   }
 

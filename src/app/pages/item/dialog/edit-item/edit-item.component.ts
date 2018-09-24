@@ -15,11 +15,17 @@ export class EditItemComponent implements OnInit {
   itemForm: FormGroup;
   item:Item;
   itemEnter:Item;
-  today: number = Date.now();
+
+  categories = [
+    {id:1, name:'equipment'},
+    {id:2, name:'accessories / peripherals'}, 
+    {id:3, name:'prizes'}
+  ];
 
   constructor(public dialogRef: MatDialogRef<EditItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private itemService:ItemService) { }
+    private itemService:ItemService) { 
+    }
 
   ngOnInit() {
     this.item = this.data.item_info;
@@ -32,6 +38,9 @@ export class EditItemComponent implements OnInit {
       number_total: new FormControl(this.item.number_total,[
         Validators.required,
         Validators.pattern('^[0-9]*$')
+      ]),
+      category_id: new FormControl(this.item.category_id.toString(),[
+        Validators.required
       ])
     });
   }
@@ -40,9 +49,6 @@ export class EditItemComponent implements OnInit {
     this.item.item_name = this.itemForm.value.item_name;
     this.item.item_description = this.itemForm.value.item_description;
     this.item.number_total= this.itemForm.value.number_total;
-
-    let tmp_date = FormParseValidation.convertDateJson2(new Date());
-    this.item.last_update_date = tmp_date;
 
     this.itemService.editItem(this.item).subscribe(
       result=>{

@@ -27,7 +27,7 @@ export class ItemComponent implements OnInit {
   getAllEquipments(){
     this.itemSub = this.itemService.getAllItemsByCategory(1).subscribe(
       result=>{
-        this.equipments = result; 
+        this.equipments = result;
       }
     );
   }
@@ -69,9 +69,9 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  deletePart(result){
+  partEvent(result){
     if(result){
-      if(result.affectedRows==1){
+      if(result.affectedRows>=1){
         this.getAllEquipments();
         this.getItemInfo(this.item.item_id);
       }
@@ -86,7 +86,7 @@ export class ItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result){
-        if(result.affectedRows==1){
+        if(result.item.affectedRows==1){
           this.getAllEquipments();
           this.item = null;
         }
