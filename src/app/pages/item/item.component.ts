@@ -5,7 +5,7 @@ import { Item } from '../../classes/item';
 import { MatDialog } from '@angular/material';
 import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './dialog/edit-item/edit-item.component';
-import { AddItemComponent } from './add-item/add-item.component';
+import { AddItemComponent } from './dialog/add-item/add-item.component';
 
 @Component({
   selector: 'app-item',

@@ -12,7 +12,7 @@ import { DeleteItemComponent } from './pages/item/dialog/delete-item/delete-item
 import { EditItemComponent } from './pages/item/dialog/edit-item/edit-item.component';
 import { DeletePartComponent } from './pages/item/dialog/delete-part/delete-part.component';
 import { AddPartComponent } from './pages/item/dialog/add-part/add-part.component';
-import { AddItemComponent } from './pages/item/add-item/add-item.component';
+import { AddItemComponent } from './pages/item/dialog/add-item/add-item.component';
 
 const routes : Routes = [
   { path:'event', component:EventComponent },
