@@ -1,14 +1,16 @@
-<mat-toolbar>{{title}}</mat-toolbar>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-2">
-      <mat-list>
-        <a routerLink = 'event' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Event</mat-list-item></a>
-        <a routerLink = 'item' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Item</mat-list-item></a>
-      </mat-list>
-    </div>
-    <div class="col-10">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+<mat-toolbar>
+  <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+  {{title}}
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" hasBackdrop="false">
+  <mat-drawer #drawer mode="side">
+    <mat-list>
+      <a routerLink = 'event' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Event</mat-list-item></a>
+      <a routerLink = 'item' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Item</mat-list-item></a>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

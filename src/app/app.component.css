@@ -5,3 +5,8 @@
 .activeRoute{
     background-color: aquamarine;
 }
+
+.example-container {
+    width: 99.99%;
+    height: 90%;
+}  
