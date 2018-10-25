@@ -57,10 +57,8 @@ export class AddItemComponent implements OnInit {
   }
 
   submitDetails(){
-    console.log(this.itemForm.value);
     this.itemService.addItem(this.itemForm.value).subscribe(
       result=>{
-        console.log(result);
         this.dialogRef.close(result);
       }
     );

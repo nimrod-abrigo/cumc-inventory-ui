@@ -12,8 +12,8 @@ export class ItemService {
 
   constructor(private _http:HttpClient) { }
 
-  public getAllItemsByCategory(category_id):Observable<any>{
-    return this._http.get(this.API_URL+"/category/"+category_id);
+  public getAllItems():Observable<any>{
+    return this._http.get(this.API_URL);
   }
 
   public deleteItem(item_id):Observable<any>{

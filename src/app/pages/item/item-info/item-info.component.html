@@ -1,10 +1,16 @@
 <div *ngIf="itemInfo">
-  <div class="col-7">
+  <div class="col-11"></div>
+  <div class="col-1">
+    <button mat-raised-button matTooltip="close" matTooltipPosition="above" (click)="close()"><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="col-12">
     <mat-card>
       <h4>{{itemInfo.item_name}}</h4>
       <p>{{itemInfo.item_description}}
         <br>Total: {{itemInfo.number_total}}
-        <br>Date Added: {{itemInfo.created_date|date}}
+        <br>Available: {{itemInfo.number_available}}
+        <br>Not Available: {{itemInfo.number_unavailable}}
+        <br>Category: {{categories[itemInfo.category_id-1].name}}
       </p>
     </mat-card>
     <mat-toolbar>
@@ -34,7 +40,4 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
   </div>
-</div>
-<div *ngIf="!itemInfo">
-  <h4>Select a item to display</h4>
 </div>

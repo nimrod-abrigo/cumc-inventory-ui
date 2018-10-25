@@ -14,6 +14,11 @@ export class ItemInfoComponent implements OnInit {
   @Input() itemInfo;
   @Output() partEvent = new EventEmitter();
   displayedColumns=["part_name","part_description","action"];
+  categories = [
+    {id:1, name:'equipment'},
+    {id:2, name:'accessories / peripherals'}, 
+    {id:3, name:'prizes'}
+  ];
 
   constructor(public dialog:MatDialog) { }
 
@@ -40,6 +45,10 @@ export class ItemInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.partEvent.emit(result);
     });
+  }
+
+  close(){
+    this.itemInfo = null;
   }
 
 }

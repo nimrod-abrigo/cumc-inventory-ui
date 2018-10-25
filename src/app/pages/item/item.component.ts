@@ -14,20 +14,20 @@ import { AddItemComponent } from './dialog/add-item/add-item.component';
 })
 export class ItemComponent implements OnInit {
 
-  equipments:Observable<any>;
+  items:Observable<any>;
   item:Item;
   itemSub:Subscription;
 
   constructor(private itemService: ItemService,public dialog:MatDialog) { }
 
   ngOnInit() {
-    this.getAllEquipments();
+    this.getAllItems();
   }
 
-  getAllEquipments(){
-    this.itemSub = this.itemService.getAllItemsByCategory(1).subscribe(
+  getAllItems(){
+    this.itemSub = this.itemService.getAllItems().subscribe(
       result=>{
-        this.equipments = result;
+        this.items = result;
       }
     );
   }
@@ -47,7 +47,7 @@ export class ItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getAllEquipments();
+      this.getAllItems();
       this.item = null;
     });
   }
@@ -62,7 +62,7 @@ export class ItemComponent implements OnInit {
       console.log(result);
       if(result){
         if(result.affectedRows==1){
-          this.getAllEquipments();
+          this.getAllItems();
           this.getItemInfo(item_info.item_id);
         }
       }
@@ -72,7 +72,7 @@ export class ItemComponent implements OnInit {
   partEvent(result){
     if(result){
       if(result.affectedRows>=1){
-        this.getAllEquipments();
+        this.getAllItems();
         this.getItemInfo(this.item.item_id);
       }
     }
@@ -87,7 +87,7 @@ export class ItemComponent implements OnInit {
       console.log(result);
       if(result){
         if(result.item.affectedRows==1){
-          this.getAllEquipments();
+          this.getAllItems();
           this.item = null;
         }
       }
