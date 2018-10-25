@@ -40,4 +40,4 @@ const routes : Routes = [
   ],
 })
 export class AppRoutingModule { }
-export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent, DeletePartComponent,AddPartComponent,AddItemComponent]
+export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent, DeletePartComponent,AddPartComponent,AddItemComponent,DashboardComponent]
