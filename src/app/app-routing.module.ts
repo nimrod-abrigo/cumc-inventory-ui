@@ -13,8 +13,10 @@ import { EditItemComponent } from './pages/item/dialog/edit-item/edit-item.compo
 import { DeletePartComponent } from './pages/item/dialog/delete-part/delete-part.component';
 import { AddPartComponent } from './pages/item/dialog/add-part/add-part.component';
 import { AddItemComponent } from './pages/item/dialog/add-item/add-item.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes : Routes = [
+  { path:'', component: DashboardComponent},
   { path:'event', component:EventComponent },
   { path:'item', component:ItemComponent },
   { path:'event/:id', component:ViewEventDetailComponent }
