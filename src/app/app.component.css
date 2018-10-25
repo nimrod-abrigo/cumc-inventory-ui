@@ -9,4 +9,8 @@
 .example-container {
     width: 99.99%;
     height: 90%;
-}  
+} 
+
+.title{
+    text-decoration-line: unset;
+}
