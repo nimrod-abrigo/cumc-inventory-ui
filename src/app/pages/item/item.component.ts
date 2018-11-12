@@ -17,6 +17,7 @@ export class ItemComponent implements OnInit {
   items:Observable<any>;
   item:Item;
   itemSub:Subscription;
+  displayedColumns=["item_name","total","available","unavailable"];
 
   constructor(private itemService: ItemService,public dialog:MatDialog) { }
 
@@ -25,11 +26,7 @@ export class ItemComponent implements OnInit {
   }
 
   getAllItems(){
-    this.itemSub = this.itemService.getAllItems().subscribe(
-      result=>{
-        this.items = result;
-      }
-    );
+    this.itemService.getAllItems().then(result=>this.items = result);
   }
 
   getItemInfo(item_id){

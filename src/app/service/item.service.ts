@@ -12,8 +12,8 @@ export class ItemService {
 
   constructor(private _http:HttpClient) { }
 
-  public getAllItems():Observable<any>{
-    return this._http.get(this.API_URL);
+  public getAllItems():any{
+    return this._http.get(this.API_URL).toPromise();
   }
 
   public deleteItem(item_id):Observable<any>{

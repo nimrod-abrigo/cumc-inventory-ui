@@ -39,11 +39,7 @@ export class EventComponent implements OnInit {
   }
 
   getAllEvents(){
-    this.eventService.getAllEvents().subscribe(
-      result=>{
-        this.events = result; 
-      }
-    );
+    this.eventService.getAllEvents().then(data=>this.events = data);
   }
 
   deleteEvent(event_id){

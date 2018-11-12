@@ -25,8 +25,8 @@ export class EventService {
     return this._http.post(this.API_URL,body,{headers: myheader});
   }
 
-  public getAllEvents():Observable<any>{
-    return this._http.get(this.API_URL);
+  public getAllEvents():any{
+    return this._http.get(this.API_URL).toPromise();
   }
 
   public deleteEvent(event_id):Observable<any>{
@@ -45,8 +45,8 @@ export class EventService {
     return this._http.put(this.API_URL+"/"+event.event_id,body,{headers: myheader});
   }
 
-  public getEventDetail(event_id):Observable<any>{
-    return this._http.get(this.API_URL+"/"+event_id);
+  public getEventDetail(event_id):any{
+    return this._http.get(this.API_URL+"/"+event_id).toPromise();
   }
 
 }
