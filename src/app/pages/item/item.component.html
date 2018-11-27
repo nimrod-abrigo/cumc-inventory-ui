@@ -50,7 +50,7 @@
           </mat-cell>
         </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getItemInfo(row.item_id)"></mat-row>
       </table>
       <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
