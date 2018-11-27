@@ -14,3 +14,9 @@
 .title{
     text-decoration-line: unset;
 }
+
+mat-drawer {
+    min-width: 100px !important;
+    width: 85vw !important;
+    max-width: 200px !important;
+}
