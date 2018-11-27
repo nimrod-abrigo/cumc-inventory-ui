@@ -1,49 +1,56 @@
 <div class="row">
   <div class="col-5">
       <mat-toolbar>
-          <mat-toolbar-row>
-            <span>Items</span>
-            <span class="example-spacer"></span>
-            <button mat-raised-button matTooltip="Add Item" matTooltipPosition="above" (click)="addItem()"><mat-icon>add</mat-icon></button>
-          </mat-toolbar-row>
-        </mat-toolbar>
-      <!--<mat-nav-list>
-        <mat-list-item *ngFor="let item of items">
-            <a matLine (click)="getItemInfo(item.item_id)">{{item.item_name}}</a>
-            <button mat-icon-button (click)="editItem(item)" matTooltip="Edit Item" matTooltipPosition = 'below'>
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteItem(item.item_id)" matTooltip="Delete Item" matTooltipPosition = 'below'>
-              <mat-icon>delete</mat-icon>
-            </button>
-        </mat-list-item>
-      </mat-nav-list>-->
-      <table mat-table [dataSource]="items" matSort class="mat-elevation-z8 full-width" (matSortChange)="sortData($event)">
+        <mat-toolbar-row>
+          <span>Items</span>
+          <span class="example-spacer"></span>
+          <button mat-raised-button matTooltip="Add Item" matTooltipPosition="above" (click)="addItem()"><mat-icon>add</mat-icon></button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-form-field class="full-width">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
         <ng-container matColumnDef="item_name">
-            <mat-header-cell *matHeaderCellDef>Item Name </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Item Name </mat-header-cell>
             <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="category">
-            <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
             <mat-cell *matCellDef="let item"> sample </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="total">
-            <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+          <ng-container matColumnDef="number_total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
             <mat-cell *matCellDef="let item"> {{item.number_total}} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="available">
-            <mat-header-cell *matHeaderCellDef>Available</mat-header-cell>
+          <ng-container matColumnDef="number_available">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Available</mat-header-cell>
             <mat-cell *matCellDef="let item"> {{item.number_available}} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="unavailable">
-            <mat-header-cell *matHeaderCellDef>Unavailable</mat-header-cell>
+          <ng-container matColumnDef="number_unavailable">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Unavailable</mat-header-cell>
             <mat-cell *matCellDef="let item"> {{item.number_unavailable}} </mat-cell>
           </ng-container>
+          <!-- <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let item"> 
+              <button mat-button [matMenuTriggerFor]="itemSettings">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #itemSettings="matMenu">
+                <button mat-menu-item (click)="getItemInfo(item.item_id)"><mat-icon>info</mat-icon> View</button>
+                <button mat-menu-item (click)="editItem(item)"><mat-icon>edit</mat-icon> Edit</button>
+                <button mat-menu-item (click)="deleteItem(item.item_id)"><mat-icon>delete</mat-icon> Delete</button>
+
+              </mat-menu>
+            </mat-cell>
+          </ng-container> -->
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
       </table>
+      <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-  <div class="col-7">
+  <div class="col-6">
     <app-item-info [itemInfo] = "item" (partEvent)="partEvent($event)"></app-item-info>
   </div>
 </div>

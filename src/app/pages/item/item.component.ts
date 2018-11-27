@@ -1,32 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ItemService } from '../../service/item.service';
 import { Observable, Subscription } from 'rxjs';
 import { Item } from '../../classes/item';
-import { MatDialog } from '@angular/material';
+import { MatDialog, Sort, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './dialog/edit-item/edit-item.component';
 import { AddItemComponent } from './dialog/add-item/add-item.component';
 
+export interface userData{
+
+}
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
+
 export class ItemComponent implements OnInit {
 
   items:Observable<any>;
   item:Item;
   itemSub:Subscription;
-  displayedColumns=["item_name","total","available","unavailable"];
+  displayedColumns=["item_name","category","number_total","number_available","number_unavailable"];
+  dataSource:MatTableDataSource<userData>;
 
-  constructor(private itemService: ItemService,public dialog:MatDialog) { }
+  constructor(private itemService: ItemService,public dialog:MatDialog) {
+  }
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   ngOnInit() {
     this.getAllItems();
   }
 
   getAllItems(){
-    this.itemService.getAllItems().then(result=>this.items = result);
+    this.itemService.getAllItems().subscribe(
+      result=>{
+        let data:any = result;
+        this.items = result;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    );
   }
 
   getItemInfo(item_id){
@@ -89,5 +106,9 @@ export class ItemComponent implements OnInit {
         }
       }
     });
+  }
+
+  onRowClicked(row){
+    console.log(row);
   }
 }

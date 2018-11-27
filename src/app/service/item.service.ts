@@ -13,7 +13,7 @@ export class ItemService {
   constructor(private _http:HttpClient) { }
 
   public getAllItems():any{
-    return this._http.get(this.API_URL).toPromise();
+    return this._http.get(this.API_URL);
   }
 
   public deleteItem(item_id):Observable<any>{
