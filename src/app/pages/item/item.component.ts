@@ -21,7 +21,7 @@ export class ItemComponent implements OnInit {
   items:Observable<any>;
   item:Item;
   itemSub:Subscription;
-  displayedColumns=["item_name","category","number_total","number_available","number_unavailable"];
+  displayedColumns=["item_id","item_name","category","number_total","number_available","number_unavailable"];
   dataSource:MatTableDataSource<userData>;
 
   constructor(private itemService: ItemService,public dialog:MatDialog) {
@@ -110,5 +110,9 @@ export class ItemComponent implements OnInit {
 
   onRowClicked(row){
     console.log(row);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

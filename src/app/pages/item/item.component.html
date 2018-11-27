@@ -11,42 +11,46 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
+        <ng-container matColumnDef="item_id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_id}} </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="item_name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Item Name </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="category">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-            <mat-cell *matCellDef="let item"> sample </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="number_total">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.number_total}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="number_available">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Available</mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.number_available}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="number_unavailable">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Unavailable</mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{item.number_unavailable}} </mat-cell>
-          </ng-container>
-          <!-- <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let item"> 
-              <button mat-button [matMenuTriggerFor]="itemSettings">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #itemSettings="matMenu">
-                <button mat-menu-item (click)="getItemInfo(item.item_id)"><mat-icon>info</mat-icon> View</button>
-                <button mat-menu-item (click)="editItem(item)"><mat-icon>edit</mat-icon> Edit</button>
-                <button mat-menu-item (click)="deleteItem(item.item_id)"><mat-icon>delete</mat-icon> Delete</button>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+          <mat-cell *matCellDef="let item"> sample </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="number_total">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.number_total}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="number_available">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Available</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.number_available}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="number_unavailable">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Unavailable</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.number_unavailable}} </mat-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let item"> 
+            <button mat-button [matMenuTriggerFor]="itemSettings">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #itemSettings="matMenu">
+              <button mat-menu-item (click)="getItemInfo(item.item_id)"><mat-icon>info</mat-icon> View</button>
+              <button mat-menu-item (click)="editItem(item)"><mat-icon>edit</mat-icon> Edit</button>
+              <button mat-menu-item (click)="deleteItem(item.item_id)"><mat-icon>delete</mat-icon> Delete</button>
 
-              </mat-menu>
-            </mat-cell>
-          </ng-container> -->
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+            </mat-menu>
+          </mat-cell>
+        </ng-container> -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
       </table>
       <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
