@@ -19,10 +19,16 @@ export class ItemInfoComponent implements OnInit {
     {id:2, name:'accessories / peripherals'}, 
     {id:3, name:'prizes'}
   ];
+  category_name;
 
-  constructor(public dialog:MatDialog) { }
+  constructor(public dialog:MatDialog) { 
+  }
 
   ngOnInit() {
+    if(this.itemInfo != null){
+      this.category_name = this.categories.find(x=>x.id == this.itemInfo.category_id).name;
+      console.log(this.category_name);
+    } 
   }
 
   addPart(item_id){
