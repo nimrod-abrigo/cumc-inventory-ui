@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { EventClass } from '../classes/event';
 
 @Injectable({
   providedIn: 'root'
@@ -10,39 +12,22 @@ export class EventService {
 
   private readonly API_URL = environment.apiUrl+"/event";
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private afs: AngularFirestore) { }
 
-  public addEvent(event):Observable<any>{
-    const myheader = new HttpHeaders().set('Content-Type', 'application/json')
-    
-    let body = { 
-      event_name: event.event_name,
-      event_remarks : event.event_remarks,
-      start_date : event.start_date,
-      end_date : event.end_date
-    }
-
-    return this._http.post(this.API_URL,body,{headers: myheader});
+  public addEvent(event){
+    return this.afs.collection('events').add(event);
   }
 
-  public getAllEvents():any{
-    return this._http.get(this.API_URL).toPromise();
+  public getAllEvents(){
+    return this.afs.collection('events',ref => ref.orderBy('last_update_date','desc')).snapshotChanges();
   }
 
-  public deleteEvent(event_id):Observable<any>{
-    return this._http.delete(this.API_URL+"/"+event_id);
+  public deleteEvent(event_id){
+    return this.afs.doc('events/' + event_id).delete();
   }
 
-  public editEvent(event):Observable<any>{
-    const myheader = new HttpHeaders().set('Content-Type', 'application/json')
-    
-    let body = { 
-      event_name: event.event_name,
-      event_remarks : event.event_remarks,
-      start_date : event.start_date,
-      end_date : event.end_date
-    }
-    return this._http.put(this.API_URL+"/"+event.event_id,body,{headers: myheader});
+  public editEvent(event,event_id){
+    return this.afs.doc('events/' + event_id).update(event);
   }
 
   public getEventDetail(event_id):any{

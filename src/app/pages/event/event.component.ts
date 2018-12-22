@@ -5,6 +5,7 @@ import { EventService } from '../../service/event.service';
 import { Observable } from 'rxjs';
 import { DeleteEventComponent } from './delete-event/delete-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { EventClass } from '../../classes/event';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 export class EventComponent implements OnInit {
 
   events: Observable<any>;
+  eventList:EventClass[];
 
   constructor(public dialog:MatDialog, public snackBar: MatSnackBar, private eventService:EventService) { }
 
@@ -31,7 +33,6 @@ export class EventComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
         if(result.affectedRows == 1){
-          this.openSnackBar("event inserted",null);
           this.getAllEvents();
         }
       }
@@ -39,7 +40,16 @@ export class EventComponent implements OnInit {
   }
 
   getAllEvents(){
-    this.eventService.getAllEvents().then(data=>this.events = data);
+    this.eventService.getAllEvents().subscribe(
+      result=>{
+        this.eventList = [];
+        result.forEach(element=>{
+          const data = element.payload.doc.data() as EventClass;
+          data.event_id = element.payload.doc.id;
+          this.eventList.push(data);
+        })
+      }
+    );
   }
 
   deleteEvent(event_id){
@@ -62,16 +72,10 @@ export class EventComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
         if(result.affectedRows == 1){
-          this.openSnackBar("event edited",null);
           this.getAllEvents();
         }
       }
     });
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
 }

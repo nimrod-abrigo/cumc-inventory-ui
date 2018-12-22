@@ -11,17 +11,13 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
-        <ng-container matColumnDef="item_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.item_id}} </mat-cell>
-        </ng-container>
         <ng-container matColumnDef="item_name">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
           <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="category">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-          <mat-cell *matCellDef="let item"> sample </mat-cell>
+          <mat-cell *matCellDef="let item"> {{item.category_id}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="number_total">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
@@ -34,6 +30,10 @@
         <ng-container matColumnDef="number_unavailable">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Unavailable</mat-header-cell>
           <mat-cell *matCellDef="let item"> {{item.number_unavailable}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="last_update_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Last Update Date</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.last_update_date|date:'medium'}} </mat-cell>
         </ng-container>
         <!-- <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -50,7 +50,7 @@
           </mat-cell>
         </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getItemInfo(row.item_id)"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
       </table>
       <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>

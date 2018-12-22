@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Item } from '../classes/item';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +12,23 @@ export class ItemService {
 
   private readonly API_URL = environment.apiUrl+"/item";
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient, private afs: AngularFirestore) { }
 
-  public getAllItems():any{
-    return this._http.get(this.API_URL);
+  public addItem(item){
+    return this.afs.collection('items').add(item);
+  }
+
+  public getAllItems(){
+    // return this.afs.collection<Item>('items').snapshotChanges();
+    return this.afs.collection('items',ref => ref.orderBy('last_update_date','desc')).snapshotChanges();
   }
 
   public deleteItem(item_id):Observable<any>{
     return this._http.delete(this.API_URL+"/"+item_id);
+  }
+
+  public deleteItemFire(item_id){
+    return this.afs.doc('items/'+item_id).delete();
   }
 
   public getItemParts(item_id):Observable<any>{
@@ -47,11 +58,5 @@ export class ItemService {
     const myheader = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this._http.post(this.API_URL+"/part/"+item_id,part,{headers: myheader});
-  }
-
-  public addItem(item){
-    const myheader = new HttpHeaders().set('Content-Type', 'application/json');
-    
-    return this._http.post(this.API_URL,item,{headers: myheader});
   }
 }

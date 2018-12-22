@@ -44,19 +44,25 @@ export class EditEventComponent implements OnInit {
     this.eventClass.event_name = eventValues.event_name;
     this.eventClass.event_remarks = eventValues.event_remarks;
     
-    let tmp_date = FormParseValidation.convertDateJson(eventValues.start_date);
+    let tmp_date = FormParseValidation.convertDateJson2(eventValues.start_date);
     this.eventClass.start_date = tmp_date;
-    tmp_date = FormParseValidation.convertDateJson(eventValues.end_date);
+    tmp_date = FormParseValidation.convertDateJson2(eventValues.end_date);
     this.eventClass.end_date = tmp_date;
+    this.eventClass.last_update_date = FormParseValidation.convertDateJson2(new Date());
+    let id = this.eventClass.event_id;
 
-    console.log(this.eventClass);
+    delete this.eventClass.event_id;
 
-    this.eventService.editEvent(this.eventClass).subscribe(
+    this.eventService.editEvent(this.eventClass, id).
+    then(
       result=>{
-        this.result = result;
-        this.dialogRef.close(this.result);
+        this.dialogRef.close("success");
       }
-    );
+    ).catch(
+      error=>{
+        this.dialogRef.close("error")
+      }
+    )
   }
 
 }

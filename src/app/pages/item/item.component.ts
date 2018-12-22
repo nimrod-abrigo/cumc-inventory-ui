@@ -6,6 +6,7 @@ import { MatDialog, Sort, MatTableDataSource, MatSort, MatPaginator } from '@ang
 import { DeleteItemComponent } from './dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './dialog/edit-item/edit-item.component';
 import { AddItemComponent } from './dialog/add-item/add-item.component';
+import { ItemInfoComponent } from './item-info/item-info.component';
 
 export interface userData{
 
@@ -19,9 +20,10 @@ export interface userData{
 export class ItemComponent implements OnInit {
 
   items:Observable<any>;
+  itemList:Item[];
   item:Item;
   itemSub:Subscription;
-  displayedColumns=["item_id","item_name","category","number_total","number_available","number_unavailable"];
+  displayedColumns=["item_name","category","number_total","number_available","number_unavailable","last_update_date"];
   dataSource:MatTableDataSource<userData>;
 
   constructor(private itemService: ItemService,public dialog:MatDialog) {
@@ -37,32 +39,37 @@ export class ItemComponent implements OnInit {
   getAllItems(){
     this.itemService.getAllItems().subscribe(
       result=>{
-        let data:any = result;
-        this.items = result;
-        this.dataSource = new MatTableDataSource(data);
+        this.itemList=[];
+        result.forEach(element => {
+          const data = element.payload.doc.data() as Item;
+          data.item_id = element.payload.doc.id;
+          this.itemList.push(data as Item);
+        });
+        this.dataSource = new MatTableDataSource(this.itemList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       }
     );
   }
 
-  getItemInfo(item_id){
-    this.itemService.getItemParts(item_id).subscribe(
+  getItemInfo(item){
+    this.itemService.getItemParts(item).subscribe(
       result=>{
         this.item = result[0];
       }
     );
   }
 
-  deleteItem(item_id){
+  deleteItem(item){
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       width: '370px',
-      data: {item_id : item_id}
+      data: {item_id : item.item_id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getAllItems();
-      this.item = null;
+      if(result == ""){
+        this.onRowClicked(item);
+      }
     });
   }
 
@@ -73,13 +80,7 @@ export class ItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        if(result.affectedRows==1){
-          this.getAllItems();
-          this.getItemInfo(item_info.item_id);
-        }
-      }
+      this.onRowClicked(item_info);
     });
   }
 
@@ -98,18 +99,27 @@ export class ItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        if(result.item.affectedRows==1){
-          this.getAllItems();
-          this.item = null;
-        }
+      if(result == "error"){
+        console.log('bigte');
+      }else{
+
       }
     });
   }
 
   onRowClicked(row){
     console.log(row);
+    const dialogRef = this.dialog.open(ItemInfoComponent,{
+      width:'700px',
+      data: {item_info : row}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == "edit"){
+        this.editItem(row);
+      }else if(result == "delete"){
+        this.deleteItem(row);
+      }
+    });
   }
 
   applyFilter(filterValue: string) {

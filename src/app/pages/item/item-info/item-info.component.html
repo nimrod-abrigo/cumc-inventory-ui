@@ -1,8 +1,7 @@
 <div *ngIf="itemInfo">
-  <!-- <div class="col-11"></div>
-  <div class="col-1">
-    <button mat-raised-button matTooltip="close" matTooltipPosition="above" (click)="close()"><mat-icon>close</mat-icon></button>
-  </div> -->
+  <!-- <div class="col-11"></div> -->
+  <button mat-raised-button matTooltip="Edit Item" matTooltipPosition="above" (click)="editItem()"><mat-icon>edit</mat-icon></button>
+  <button mat-raised-button matTooltip="Delete Item" matTooltipPosition="above" (click)="deleteItem()"><mat-icon>delete</mat-icon></button>
   <div class="col-12">
     <mat-card>
       <h4>{{itemInfo.item_name}}</h4>
@@ -10,7 +9,7 @@
         <br>Total: {{itemInfo.number_total}}
         <br>Available: {{itemInfo.number_available}}
         <br>Not Available: {{itemInfo.number_unavailable}}
-        <br>Category: {{categories[itemInfo.category_id-1].name}}
+        <br>Category: {{itemInfo.category_id}}
       </p>
     </mat-card>
     <mat-toolbar>

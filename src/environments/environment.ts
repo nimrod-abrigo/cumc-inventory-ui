@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:4000"
+  apiUrl: "http://localhost:4000",
+  firebase:{
+    apiKey: "AIzaSyBAzVlRwotQRVhbXmp3siVh0Ku129fW9LY",
+    authDomain: "cumc-inventory-c547a.firebaseapp.com",
+    databaseURL: "https://cumc-inventory-c547a.firebaseio.com",
+    projectId: "cumc-inventory-c547a",
+    storageBucket: "",
+    messagingSenderId: "444194207308"
+  }
 };
 
 /*

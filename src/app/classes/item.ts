@@ -1,14 +1,13 @@
-import { Part } from "./part";
+import { Part } from './part';
 
 export class Item {
-    item_id:Number;
-    item_name:String;
-    item_description:String;
-    number_total:Number;
-    number_available:Number;
-    number_unavailable:Number;
-    category_id:Number;
-    created_date:String;
-    last_update_date:String;
-    parts:Part[];
+    item_id: string;
+    item_name: string;
+    item_description: string;
+    number_unavailable: number;
+    number_available: number;
+    number_total:number;
+    category_id:string;
+    parts: Part[];
+    last_update_date: string;
 }

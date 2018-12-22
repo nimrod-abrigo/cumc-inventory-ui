@@ -23,7 +23,7 @@
       <div class="col-7">
         <mat-form-field class="full-width">
           <mat-select placeholder="Select Category" formControlName="category_id">
-            <mat-option *ngFor="let c of categories" value={{c.id}}>{{c.name|uppercase}}</mat-option>
+            <mat-option *ngFor="let c of categories" value={{c.name}}>{{c.name|uppercase}}</mat-option>
           </mat-select>
           <mat-error *ngIf="itemForm.get('category_id').errors?.required">Category is required</mat-error>
         </mat-form-field>

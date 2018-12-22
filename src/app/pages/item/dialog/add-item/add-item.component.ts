@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ItemService } from '../../../../service/item.service';
+import { Item } from 'src/app/classes/item';
+import { FormParseValidation } from 'src/app/classes/form-parse-validation';
 
 @Component({
   selector: 'app-add-item',
@@ -10,6 +12,7 @@ import { ItemService } from '../../../../service/item.service';
 })
 export class AddItemComponent implements OnInit {
 
+  item:Item;
   itemForm: FormGroup;
   parts: FormArray;
   categories = [
@@ -35,7 +38,7 @@ export class AddItemComponent implements OnInit {
       category_id: new FormControl('',[
         Validators.required
       ]),
-      parts: new FormArray([])
+      parts: new FormArray([]),
     });
   }
 
@@ -57,9 +60,19 @@ export class AddItemComponent implements OnInit {
   }
 
   submitDetails(){
-    this.itemService.addItem(this.itemForm.value).subscribe(
+    this.item = this.itemForm.value;
+    this.item.number_unavailable = 0;
+    this.item.number_available = this.item.number_total;
+    this.item.last_update_date = FormParseValidation.convertDateJson2(new Date());
+    console.log(this.item.last_update_date);
+    this.itemService.addItem(this.item).
+    then(
       result=>{
-        this.dialogRef.close(result);
+        this.dialogRef.close("success");
+      }
+    ).catch(
+      error=>{
+        this.dialogRef.close("error");
       }
     );
   }

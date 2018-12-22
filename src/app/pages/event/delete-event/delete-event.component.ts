@@ -19,9 +19,14 @@ export class DeleteEventComponent implements OnInit {
   }
 
   delete(){
-    this.eventService.deleteEvent(this.event_id).subscribe(
+    this.eventService.deleteEvent(this.event_id).
+    then(
       result=>{
-        this.dialogRef.close(result);
+        this.dialogRef.close("deleted");
+      }
+    ).catch(
+      error=>{
+        this.dialogRef.close("error");
       }
     );
   }

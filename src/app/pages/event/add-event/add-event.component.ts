@@ -4,6 +4,7 @@ import { EventService } from '../../../service/event.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormParseValidation } from '../../../classes/form-parse-validation';
+import { EventClass } from 'src/app/classes/event';
 
 @Component({
   selector: 'app-add-event',
@@ -11,6 +12,7 @@ import { FormParseValidation } from '../../../classes/form-parse-validation';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent implements OnInit {
+  event: EventClass;
   result: Observable<any>;
   eventForm: FormGroup;
 
@@ -34,17 +36,21 @@ export class AddEventComponent implements OnInit {
   }
 
   submitDetails(){
-    let eventValues = this.eventForm.value;
+    let event = this.eventForm.value;
 
-    let tmp_date = FormParseValidation.convertDateJson(eventValues.start_date);
-    eventValues.start_date = tmp_date;
-    tmp_date = FormParseValidation.convertDateJson(eventValues.end_date);
-    eventValues.end_date = tmp_date;
-
-    this.eventService.addEvent(eventValues).subscribe(
+    let tmp_date = FormParseValidation.convertDateJson2(event.start_date);
+    event.start_date = tmp_date;
+    tmp_date = FormParseValidation.convertDateJson2(event.end_date);
+    event.end_date = tmp_date;
+    event.last_update_date = FormParseValidation.convertDateJson2(new Date());
+    this.eventService.addEvent(event)
+    .then(
       result=>{
-        this.result = result;
-        this.dialogRef.close(this.result);
+        this.dialogRef.close("success");
+      }
+    ).catch(
+      error=>{
+        this.dialogRef.close("error");
       }
     );
   }

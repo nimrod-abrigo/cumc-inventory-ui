@@ -36,7 +36,8 @@ const routes : Routes = [
     EditItemComponent,
     DeletePartComponent,
     AddPartComponent,
-    AddItemComponent
+    AddItemComponent,
+    ItemInfoComponent
   ],
 })
 export class AppRoutingModule { }
