@@ -52,7 +52,7 @@ export class EditItemComponent implements OnInit {
     this.item.category_id = this.itemForm.value.category_id;
     let id = this.item.item_id;
     delete this.item.item_id;
-    this.itemService.editItemFire(this.item,id).
+    this.itemService.editItem(this.item,id).
     then(
       result=>{
         this.dialogRef.close("success");

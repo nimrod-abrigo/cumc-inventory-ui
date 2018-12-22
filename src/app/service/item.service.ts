@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Item } from '../classes/item';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,6 @@ export class ItemService {
   }
 
   public getAllItems(){
-    // return this.afs.collection<Item>('items').snapshotChanges();
     return this.afs.collection('items',ref => ref.orderBy('last_update_date','desc')).snapshotChanges();
   }
 
@@ -35,21 +33,7 @@ export class ItemService {
     return this._http.get(this.API_URL+"/info/"+item_id);
   }
 
-  public editItem(item):Observable<any>{
-
-    const myheader = new HttpHeaders().set('Content-Type', 'application/json');
-    
-    let body = { 
-      item_name: item.item_name,
-      item_description : item.item_description,
-      number_total : item.number_total,
-      last_update_date: item.last_update_date
-    }
-
-    return this._http.put(this.API_URL+"/"+item.item_id,body,{headers: myheader});
-  }
-
-  public editItemFire(item, item_id){
+  public editItem(item, item_id){
     return this.afs.doc('items/'+item_id).update(item);
   }
 
