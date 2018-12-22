@@ -75,7 +75,7 @@ export class ItemComponent implements OnInit {
 
   editItem(item_info){
     const dialogRef = this.dialog.open(EditItemComponent, {
-      width: '370px',
+      width: '600px',
       data: {item_info : item_info}
     });
 
@@ -108,7 +108,6 @@ export class ItemComponent implements OnInit {
   }
 
   onRowClicked(row){
-    console.log(row);
     const dialogRef = this.dialog.open(ItemInfoComponent,{
       width:'700px',
       data: {item_info : row}

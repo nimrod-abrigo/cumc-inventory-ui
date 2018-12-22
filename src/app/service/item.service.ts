@@ -49,6 +49,10 @@ export class ItemService {
     return this._http.put(this.API_URL+"/"+item.item_id,body,{headers: myheader});
   }
 
+  public editItemFire(item, item_id){
+    return this.afs.doc('items/'+item_id).update(item);
+  }
+
   public deletePart(part_id):Observable<any>{
     return this._http.delete(this.API_URL+"/part/"+part_id);
   }
