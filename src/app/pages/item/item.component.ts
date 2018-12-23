@@ -7,6 +7,8 @@ import { DeleteItemComponent } from './dialog/delete-item/delete-item.component'
 import { EditItemComponent } from './dialog/edit-item/edit-item.component';
 import { AddItemComponent } from './dialog/add-item/add-item.component';
 import { ItemInfoComponent } from './item-info/item-info.component';
+import { AddPartComponent } from './dialog/add-part/add-part.component';
+import { DeletePartComponent } from './dialog/delete-part/delete-part.component';
 
 export interface userData{
 
@@ -52,14 +54,6 @@ export class ItemComponent implements OnInit {
     );
   }
 
-  getItemInfo(item){
-    this.itemService.getItemParts(item).subscribe(
-      result=>{
-        this.item = result[0];
-      }
-    );
-  }
-
   deleteItem(item){
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       width: '370px',
@@ -84,15 +78,6 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  partEvent(result){
-    if(result){
-      if(result.affectedRows>=1){
-        this.getAllItems();
-        this.getItemInfo(this.item.item_id);
-      }
-    }
-  }
-
   addItem(){
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '600px'
@@ -107,6 +92,32 @@ export class ItemComponent implements OnInit {
     });
   }
 
+  addPart(item){
+    const dialogRef = this.dialog.open(AddPartComponent, {
+      width: '600px',
+      data: {item : item}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //this.getItemInfo(item);
+      this.onRowClicked(item);
+    });
+  }
+
+  deletePart(item,index){
+    const dialogRef = this.dialog.open(DeletePartComponent, {
+        width: '370px',
+        data:{item:item, index:index}
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != "error"){
+        this.onRowClicked(result);
+      }
+    });
+  }
+
   onRowClicked(row){
     const dialogRef = this.dialog.open(ItemInfoComponent,{
       width:'700px',
@@ -117,6 +128,10 @@ export class ItemComponent implements OnInit {
         this.editItem(row);
       }else if(result == "delete"){
         this.deleteItem(row);
+      }else if(result === "add part"){
+        this.addPart(row);
+      }else if(result.event == "delete part"){
+        this.deletePart(row,result.index);
       }
     });
   }

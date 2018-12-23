@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ItemService } from '../../../../service/item.service';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Item } from 'src/app/classes/item';
 
 @Component({
   selector: 'app-add-part',
@@ -10,7 +11,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 })
 export class AddPartComponent implements OnInit {
 
-  item_id:Number;
+  item:Item;
   partForm:FormGroup;
   partArray:FormArray;
 
@@ -19,7 +20,7 @@ export class AddPartComponent implements OnInit {
     private itemService:ItemService, private fb:FormBuilder) { }
 
   ngOnInit() {
-    this.item_id = this.data.item_id;
+    this.item = this.data.item;
     this.partForm = new FormGroup({
       parts: new FormArray([])
     });
@@ -45,11 +46,27 @@ export class AddPartComponent implements OnInit {
 
   submitDetails(){
     let partValues = this.partForm.get('parts').value;
+    let id = this.item.item_id;
+    let tmp_parts = [];
 
-    this.itemService.addPart(partValues,this.item_id).subscribe(
+    this.item.parts.forEach(element=>{
+      tmp_parts.push(element);
+    });
+    partValues.forEach(element => {
+      tmp_parts.push(element);
+    });
+
+    this.item.parts = tmp_parts;
+    delete this.item.item_id;
+
+    this.itemService.editItem(this.item, id).
+    then(
       result=>{
-        console.log(result);
-        this.dialogRef.close(result);
+        this.dialogRef.close("info");
+      }
+    ).catch(
+      error=>{
+        this.dialogRef.close("error");
       }
     );
   }

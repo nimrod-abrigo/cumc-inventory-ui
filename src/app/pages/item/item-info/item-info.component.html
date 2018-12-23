@@ -2,7 +2,7 @@
   <!-- <div class="col-11"></div> -->
   <button mat-raised-button matTooltip="Edit Item" matTooltipPosition="above" (click)="editItem()"><mat-icon>edit</mat-icon></button>
   <button mat-raised-button matTooltip="Delete Item" matTooltipPosition="above" (click)="deleteItem()"><mat-icon>delete</mat-icon></button>
-  <div class="col-12">
+  <div class="col-6">
     <mat-card>
       <h4>{{itemInfo.item_name}}</h4>
       <p>{{itemInfo.item_description}}
@@ -12,14 +12,15 @@
         <br>Category: {{itemInfo.category_id}}
       </p>
     </mat-card>
+  </div>
+    <div class="col-12">
     <mat-toolbar>
       <mat-toolbar-row>
         <span>Parts</span>
         <span class="example-spacer"></span>
-        <button mat-raised-button matTooltip="Add Part" matTooltipPosition="above" (click)="addPart(itemInfo.item_id)"><mat-icon>add</mat-icon></button>
+        <button mat-raised-button matTooltip="Add Part" matTooltipPosition="above" (click)="addPart()"><mat-icon>add</mat-icon></button>
       </mat-toolbar-row>
     </mat-toolbar>
-    
     <mat-table #table [dataSource]="itemInfo.parts">
         <ng-container matColumnDef="part_name">
           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -32,7 +33,7 @@
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
           <mat-cell  *matCellDef="let part">
-            <button mat-raised-button matTooltip="Delete Part" matTooltipPosition="above" (click)="deletePart(part.part_id)"><mat-icon>delete</mat-icon></button>
+            <button mat-raised-button matTooltip="Delete Part" matTooltipPosition="above" (click)="deletePart(part)"><mat-icon>delete</mat-icon></button>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

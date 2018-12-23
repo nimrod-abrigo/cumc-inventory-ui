@@ -20,7 +20,7 @@ export class DeleteItemComponent implements OnInit {
   }
 
   delete(){
-    this.itemService.deleteItemFire(this.item_id).
+    this.itemService.deleteItem(this.item_id).
     then(
       result=>{
         this.dialogRef.close("success");

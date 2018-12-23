@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeletePartComponent } from '../dialog/delete-part/delete-part.component';
-import { AddPartComponent } from '../dialog/add-part/add-part.component';
 import { Item } from 'src/app/classes/item';
+import { ItemService } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-item-info',
@@ -20,7 +20,8 @@ export class ItemInfoComponent implements OnInit {
 
   constructor(public dialog:MatDialog,
     public dialogRef: MatDialogRef<ItemInfoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private itemService:ItemService) { 
   }
 
   ngOnInit() {
@@ -35,16 +36,36 @@ export class ItemInfoComponent implements OnInit {
     this.dialogRef.close("delete");
   }
 
-  // addPart(item_id){
-  //   const dialogRef = this.dialog.open(AddPartComponent, {
-  //     width: '500px',
-  //     data: {item_id : item_id}
-  //   });
+  addPart(){
+    this.dialogRef.close("add part");
+  }
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.partEvent.emit(result);
-  //   });
-  // }
+  deletePart(select){
+    var index = this.itemInfo.parts.findIndex(function(item, i){
+      return item.part_name === select.part_name && item.part_description == select.part_description;
+    });
+
+    let data = {
+      index: index,
+      event: "delete part"
+    }
+    
+    this.dialogRef.close(data);
+    //let id = this.itemInfo.item_id;
+
+    // const dialogRef = this.dialog.open(DeletePartComponent, {
+    //     width: '370px',
+    //     data:{item:this.itemInfo, index:index}
+    //   }
+    // );
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result != ""){
+    //     console.log(result);
+    //     this.itemInfo = result;
+    //   }
+    // });
+  }
 
   // deletePart(part_id){
   //   const dialogRef = this.dialog.open(DeletePartComponent, {
