@@ -19,6 +19,7 @@ export interface eventData{
 export class EventComponent implements OnInit {
 
   events: Observable<any>;
+  selectedEvent:EventClass;
   eventList:EventClass[];
   displayedColumns=["event_name","start_date","end_date","last_update_date"];
   dataSource:MatTableDataSource<EventClass>;
@@ -62,33 +63,39 @@ export class EventComponent implements OnInit {
     );
   }
 
-  deleteEvent(event_id){
+  deleteEvent($event){
+    let event_id = $event;
     const dialogRef = this.dialog.open(DeleteEventComponent, {
       width: '370px',
       data: {event_id : event_id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAllEvents();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.selectedEvent = null;
+    // });
   }
 
-  editEvent(event){
+  editEvent($event){
+    let event = $event
     const dialogRef = this.dialog.open(EditEventComponent, {
       width: '370px',
       data: {event : event}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result != null){
-        if(result.affectedRows == 1){
-          this.getAllEvents();
-        }
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result != null){
+    //     if(result.affectedRows == 1){
+    //       this.getAllEvents();
+    //     }
+    //   }
+    // });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  eventDetail(event){
+    this.selectedEvent = event;
   }
 }

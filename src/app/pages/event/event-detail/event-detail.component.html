@@ -1,0 +1,11 @@
+<div *ngIf="eventDetail != null">
+  <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below' (click)="editEvent()"><mat-icon>edit</mat-icon></button>
+  <button mat-stroked-button color="warn" matTooltip="Delete Event" matTooltipPosition = 'below' (click)="deleteEvent()"><mat-icon>delete</mat-icon></button>
+  <mat-list>
+    <mat-list-item><h3>{{eventDetail.event_name}}</h3></mat-list-item>
+    <mat-list-item>{{eventDetail.event_remarks}}<br>
+      duration: {{eventDetail.start_date|date:'mediumDate'}} - {{eventDetail.end_date|date:'mediumDate'}}<br>
+      last update date: {{eventDetail.last_update_date|date:'medium'}}
+    </mat-list-item>
+  </mat-list>
+</div>
