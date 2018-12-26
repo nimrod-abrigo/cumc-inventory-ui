@@ -1,26 +1,63 @@
+<!-- <div class="row">
+  <div class = 'col-12'>
+    <h4>Event</h4>
+  </div>
+</div>
+<div class="row">
+  <div class = 'col-12'>
+    <button mat-button matTooltip="Add Event" (click) = "addEvent()" matTooltipPosition = 'right'><mat-icon>add</mat-icon></button>
+  </div>
+</div>
+<div class="row">
+  <div class='col-12'>
+    <div class = 'col-4' *ngFor="let event of eventList">
+      <mat-card>
+        <mat-card-title>{{event.event_name}}</mat-card-title>
+        <mat-card-subtitle>{{event.event_remarks}}</mat-card-subtitle>
+        <mat-card-content>{{event.start_date|date}} - {{event.end_date|date}}</mat-card-content>
+        <mat-card-actions>
+          <button [routerLink]="['/event',event.event_id]" mat-stroked-button matTooltip="Event Information" matTooltipPosition = 'below'><mat-icon>info</mat-icon></button>
+          <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below' (click)="editEvent(event)"><mat-icon>edit</mat-icon></button>
+          <button mat-stroked-button color="warn" matTooltip="Delete Event" matTooltipPosition = 'below' (click)="deleteEvent(event.event_id)"><mat-icon>delete</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div> -->
+
 <div class="row">
     <div class = 'col-12'>
-      <h4>Event</h4>
+      <button mat-button matTooltip="Add Event"  (click) = "addEvent()" matTooltipPosition = 'right'><mat-icon>add</mat-icon></button>
     </div>
   </div>
-  <div class="row">
-    <div class = 'col-12'>
-      <button mat-button matTooltip="Add Event" (click) = "addEvent()" matTooltipPosition = 'right'><mat-icon>add</mat-icon></button>
-    </div>
+<div class="row">
+  <div class="col-5">
+    <mat-form-field class="full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
+        <ng-container matColumnDef="event_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Event Name</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.event_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="start_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.start_date|date:'mediumDate'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="end_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.end_date|date:'mediumDate'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="last_update_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Last Updated</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.last_update_date|date:'medium'}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+    </table>
+    <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-  <div class="row">
-    <div class='col-12'>
-      <div class = 'col-4' *ngFor="let event of eventList">
-        <mat-card>
-          <mat-card-title>{{event.event_name}}</mat-card-title>
-          <mat-card-subtitle>{{event.event_remarks}}</mat-card-subtitle>
-          <mat-card-content>{{event.start_date|date}} - {{event.end_date|date}}</mat-card-content>
-          <mat-card-actions>
-            <button [routerLink]="['/event',event.event_id]" mat-stroked-button matTooltip="Event Information" matTooltipPosition = 'below'><mat-icon>info</mat-icon></button>
-            <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below' (click)="editEvent(event)"><mat-icon>edit</mat-icon></button>
-            <button mat-stroked-button color="warn" matTooltip="Delete Event" matTooltipPosition = 'below' (click)="deleteEvent(event.event_id)"><mat-icon>delete</mat-icon></button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
+  <div class="col-7">
+    
   </div>
+</div>
