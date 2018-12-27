@@ -10,9 +10,7 @@ import { EventClass } from '../classes/event';
 })
 export class EventService {
 
-  private readonly API_URL = environment.apiUrl+"/event";
-
-  constructor(private _http: HttpClient, private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) { }
 
   public addEvent(event){
     return this.afs.collection('events').add(event);
@@ -28,10 +26,6 @@ export class EventService {
 
   public editEvent(event,event_id){
     return this.afs.doc('events/' + event_id).update(event);
-  }
-
-  public getEventDetail(event_id):any{
-    return this._http.get(this.API_URL+"/"+event_id).toPromise();
   }
 
 }
