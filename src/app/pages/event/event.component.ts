@@ -70,9 +70,9 @@ export class EventComponent implements OnInit {
       data: {event_id : event_id}
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.selectedEvent = null;
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedEvent = null;
+    });
   }
 
   editEvent($event){
