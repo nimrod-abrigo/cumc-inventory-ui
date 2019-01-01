@@ -1,10 +1,10 @@
-<mat-toolbar>
-  <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
-  <a routerLink='' class='title'>{{title}}</a>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="drawer.toggle()"><mat-icon style="color:white;">menu</mat-icon></button>
+  <a routerLink='' class="title" style="color:white;">{{title}}</a>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" hasBackdrop="false">
-  <mat-drawer #drawer mode="side" opened>
+  <mat-drawer #drawer mode="side" opened color="primary">
     <mat-list>
       <a routerLink = 'event' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Event</mat-list-item></a>
       <a routerLink = 'item' class='full-width' mat-button routerLinkActive = 'activeRoute'><mat-list-item>Item</mat-list-item></a>
