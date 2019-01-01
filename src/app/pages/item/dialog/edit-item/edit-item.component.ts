@@ -49,6 +49,7 @@ export class EditItemComponent implements OnInit {
     this.item.item_name = this.itemForm.value.item_name;
     this.item.item_description = this.itemForm.value.item_description;
     this.item.number_total= this.itemForm.value.number_total;
+    this.item.number_available = this.itemForm.value.number_total - this.item.number_unavailable;
     this.item.category_id = this.itemForm.value.category_id;
     let id = this.item.item_id;
     delete this.item.item_id;

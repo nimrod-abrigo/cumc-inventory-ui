@@ -1,31 +1,5 @@
-<!-- <div class="row">
-  <div class = 'col-12'>
-    <h4>Event</h4>
-  </div>
-</div>
 <div class="row">
-  <div class = 'col-12'>
-    <button mat-button matTooltip="Add Event" (click) = "addEvent()" matTooltipPosition = 'right'><mat-icon>add</mat-icon></button>
-  </div>
-</div>
-<div class="row">
-  <div class='col-12'>
-    <div class = 'col-4' *ngFor="let event of eventList">
-      <mat-card>
-        <mat-card-title>{{event.event_name}}</mat-card-title>
-        <mat-card-subtitle>{{event.event_remarks}}</mat-card-subtitle>
-        <mat-card-content>{{event.start_date|date}} - {{event.end_date|date}}</mat-card-content>
-        <mat-card-actions>
-          <button [routerLink]="['/event',event.event_id]" mat-stroked-button matTooltip="Event Information" matTooltipPosition = 'below'><mat-icon>info</mat-icon></button>
-          <button mat-stroked-button color="accent" matTooltip="Edit Event" matTooltipPosition = 'below' (click)="editEvent(event)"><mat-icon>edit</mat-icon></button>
-          <button mat-stroked-button color="warn" matTooltip="Delete Event" matTooltipPosition = 'below' (click)="deleteEvent(event.event_id)"><mat-icon>delete</mat-icon></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-</div> -->
-<div class="row">
-  <div class="col-5">
+  <div class="col-12" *ngIf="!clicked">
     <button mat-button matTooltip="Add Event"  (click) = "addEvent()" matTooltipPosition = 'right'><mat-icon>add</mat-icon></button>
     <mat-form-field class="full-width">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -52,7 +26,7 @@
     </table>
     <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-  <div class="col-7">
-    <app-event-detail [eventDetail] = "selectedEvent" (edit_event)="editEvent($event)" (delete_event)="deleteEvent($event)"></app-event-detail>
+  <div class="col-12" *ngIf="clicked">
+    <app-event-detail [eventDetail] = "selectedEvent" (edit_event)="editEvent($event)" (delete_event)="deleteEvent($event)" (back)="getAllEvents()"></app-event-detail>
   </div>
 </div>

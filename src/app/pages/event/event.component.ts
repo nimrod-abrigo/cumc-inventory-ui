@@ -18,6 +18,7 @@ export interface eventData{
 })
 export class EventComponent implements OnInit {
 
+  clicked = false;
   events: Observable<any>;
   selectedEvent:EventClass;
   eventList:EventClass[];
@@ -48,6 +49,7 @@ export class EventComponent implements OnInit {
   }
 
   getAllEvents(){
+   this.clicked=false;
     this.eventService.getAllEvents().subscribe(
       result=>{
         this.eventList = [];
@@ -71,7 +73,10 @@ export class EventComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedEvent = null;
+      if(result == "deleted"){
+        this.clicked = false;
+      }
+      //this.selectedEvent = null;
     });
   }
 
@@ -97,5 +102,6 @@ export class EventComponent implements OnInit {
 
   eventDetail(event){
     this.selectedEvent = event;
+    this.clicked = true;
   }
 }

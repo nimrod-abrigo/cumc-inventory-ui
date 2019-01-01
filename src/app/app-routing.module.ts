@@ -6,7 +6,6 @@ import { ItemComponent } from './pages/item/item.component';
 import { AddEventComponent } from './pages/event/add-event/add-event.component';
 import { DeleteEventComponent } from './pages/event/delete-event/delete-event.component';
 import { EditEventComponent } from './pages/event/edit-event/edit-event.component';
-import { ViewEventDetailComponent } from './pages/event/view-event-detail/view-event-detail.component';
 import { ItemInfoComponent } from './pages/item/item-info/item-info.component';
 import { DeleteItemComponent } from './pages/item/dialog/delete-item/delete-item.component';
 import { EditItemComponent } from './pages/item/dialog/edit-item/edit-item.component';
@@ -14,12 +13,12 @@ import { DeletePartComponent } from './pages/item/dialog/delete-part/delete-part
 import { AddPartComponent } from './pages/item/dialog/add-part/add-part.component';
 import { AddItemComponent } from './pages/item/dialog/add-item/add-item.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { EventItemListComponent } from './pages/event/event-item-list/event-item-list.component';
 
 const routes : Routes = [
   { path:'', component: DashboardComponent},
   { path:'event', component:EventComponent },
-  { path:'item', component:ItemComponent },
-  { path:'event/:id', component:ViewEventDetailComponent }
+  { path:'item', component:ItemComponent }
 ];
 
 @NgModule({
@@ -37,8 +36,9 @@ const routes : Routes = [
     DeletePartComponent,
     AddPartComponent,
     AddItemComponent,
-    ItemInfoComponent
+    ItemInfoComponent,
+    EventItemListComponent,
   ],
 })
 export class AppRoutingModule { }
-export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ViewEventDetailComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent, DeletePartComponent,AddPartComponent,AddItemComponent,DashboardComponent]
+export const routingComponents = [EventComponent,ItemComponent, AddEventComponent, DeleteEventComponent,EditEventComponent, ItemInfoComponent, DeleteItemComponent, EditItemComponent, DeletePartComponent,AddPartComponent,AddItemComponent,DashboardComponent]

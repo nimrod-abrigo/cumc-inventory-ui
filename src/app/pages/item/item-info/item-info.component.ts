@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DeletePartComponent } from '../dialog/delete-part/delete-part.component';
 import { Item } from 'src/app/classes/item';
-import { ItemService } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-item-info',
@@ -20,8 +18,7 @@ export class ItemInfoComponent implements OnInit {
 
   constructor(public dialog:MatDialog,
     public dialogRef: MatDialogRef<ItemInfoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private itemService:ItemService) { 
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
   }
 
   ngOnInit() {
